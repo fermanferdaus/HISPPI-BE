@@ -3,13 +3,32 @@ import db from "../config/db.js"; // sesuaikan dengan koneksi db
 // GET semua data
 export const getAllPengurus = async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT * FROM sejarah_kepengurusan ORDER BY periode ASC");
+    const [rows] = await db.query(
+      "SELECT * FROM sejarah_kepengurusan ORDER BY periode ASC"
+    );
     res.json(rows);
   } catch (error) {
     console.error("❌ Error getAllPengurus:", error);
     res.status(500).json({ message: "Gagal mengambil data kepengurusan" });
   }
 };
+
+export async function getKepengurusanById(req, res) {
+  const { id } = req.params;
+  try {
+    const [rows] = await db.query("SELECT * FROM sejarah_kepengurusan WHERE id = ?", [
+      id,
+    ]);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Data tidak ditemukan" });
+    }
+    res.json(rows[0]);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Gagal mengambil data", error: err.message });
+  }
+}
 
 // POST tambah data
 export const createPengurus = async (req, res) => {

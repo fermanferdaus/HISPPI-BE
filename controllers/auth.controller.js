@@ -21,5 +21,15 @@ export async function login(req, res) {
     { expiresIn: "1d" }
   );
 
-  res.json({ token, role: user.role, name: user.name, email: user.email });
+  res.json({
+    success: true,
+    message: "Login berhasil",
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  });
 }

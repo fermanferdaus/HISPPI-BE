@@ -1,23 +1,23 @@
 import express from "express";
 import {
   getAllPengurus,
+  getKepengurusanById,
   createPengurus,
   updatePengurus,
   deletePengurus,
 } from "../controllers/pengurus.controller.js";
+import { verifyToken } from "../middlewares/auth.middleware.js";
+import { checkRole } from "../middlewares/role.middleware.js";
 
 const router = express.Router();
 
-// GET semua data
+// publik
 router.get("/", getAllPengurus);
+router.get("/:id", getKepengurusanById);
 
-// POST tambah data
-router.post("/", createPengurus);
-
-// PUT update
-router.put("/:id", updatePengurus);
-
-// DELETE hapus
-router.delete("/:id", deletePengurus);
+// hanya superadmin
+router.post("/", verifyToken, checkRole(["superadmin"]), createPengurus);
+router.put("/:id", verifyToken, checkRole(["superadmin"]), updatePengurus);
+router.delete("/:id", verifyToken, checkRole(["superadmin"]), deletePengurus);
 
 export default router;
