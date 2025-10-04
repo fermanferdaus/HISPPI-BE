@@ -20,7 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);
-app.use("/uploads", express.static("uploads"));
+app.use("/api/uploads", express.static("uploads"));
 app.use("/api/info", infoRoutes);
 app.use("/api/partners", partnerRoutes);
 app.use("/api/kepengurusan", pengurusRoutes);
