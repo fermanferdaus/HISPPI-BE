@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2025 at 12:02 AM
+-- Generation Time: Oct 07, 2025 at 01:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,6 +41,29 @@ INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 (1, 'Pengumuman', '2025-10-03 15:32:38'),
 (2, 'Berita', '2025-10-03 15:32:38'),
 (8, 'Informasi', '2025-10-04 17:57:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dewan_pengurus_daerah`
+--
+
+CREATE TABLE `dewan_pengurus_daerah` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `provinsi` varchar(100) NOT NULL,
+  `alamat_sekretariat` text DEFAULT NULL,
+  `nomor` varchar(20) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dewan_pengurus_daerah`
+--
+
+INSERT INTO `dewan_pengurus_daerah` (`id`, `nama`, `provinsi`, `alamat_sekretariat`, `nomor`, `foto`, `created_at`) VALUES
+(1, 'Dr. HM. Nasrullah Yusuf, S.E., M.B.A.', 'Lampung', 'Jl. Zainal Abidin Pagaralam, No.9-11 Labuhan Ratu, Kota Bandar Lampung Provinsi Lampung, 35132', '08888888888', 'Rektor.jpg', '2025-10-06 19:20:11');
 
 -- --------------------------------------------------------
 
@@ -145,6 +168,30 @@ INSERT INTO `sejarah_kepengurusan` (`id`, `periode`, `ketua_umum`, `sekjen`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `struktur_organisasi`
+--
+
+CREATE TABLE `struktur_organisasi` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `periode` varchar(50) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `struktur_organisasi`
+--
+
+INSERT INTO `struktur_organisasi` (`id`, `nama`, `jabatan`, `periode`, `foto`, `created_at`) VALUES
+(1, 'Dr. HM. Nasrullah Yusuf, S.E., M.B.A.', 'Ketua Umum', '2010-2025', 'Rektor.jpg', '2025-10-06 16:21:50'),
+(2, 'Juliana Tjandra, S.Kom.', 'Sekretaris Jendral', '2010-2025', 'Rektor.jpg', '2025-10-06 18:09:00'),
+(3, 'Dr. HM. Nasrullah Yusuf, S.E., M.B.A.', 'Bendahara Umum', '2010-2025', 'Rektor.jpg', '2025-10-06 18:09:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -163,7 +210,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES
 (1, 'Super Admin', 'superadmin@hisppi.com', '$2b$10$kb5OTrRCnuDmcwr5pU8/ueujw/Blh/fz/K1vTrRkgN5Pg0lgq6p1C', 'superadmin', '2025-10-03 15:33:21'),
-(2, 'admin', 'admin@hsppi.com', '$2b$10$8O/gQaaosKpEBHRAnfaW9.A7wY9/kM6x8JfXX5FLAEcnBwZenV8Si', 'admin', '2025-10-04 13:43:33');
+(2, 'admin', 'admin@hisppi.com', '$2b$10$elaWC4dY0EIZcdO8pt0wu.2SYtc1gp/Ivw/2wATNuy/Nf7YBaTsVS', 'admin', '2025-10-04 13:43:33');
 
 --
 -- Indexes for dumped tables
@@ -175,6 +222,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VA
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `dewan_pengurus_daerah`
+--
+ALTER TABLE `dewan_pengurus_daerah`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `institution_info`
@@ -203,6 +256,12 @@ ALTER TABLE `sejarah_kepengurusan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `struktur_organisasi`
+--
+ALTER TABLE `struktur_organisasi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -218,6 +277,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `dewan_pengurus_daerah`
+--
+ALTER TABLE `dewan_pengurus_daerah`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `institution_info`
@@ -242,6 +307,12 @@ ALTER TABLE `partners`
 --
 ALTER TABLE `sejarah_kepengurusan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `struktur_organisasi`
+--
+ALTER TABLE `struktur_organisasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

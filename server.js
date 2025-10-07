@@ -8,6 +8,8 @@ import categoryRoutes from "./routes/category.routes.js";
 import infoRoutes from "./routes/info.routes.js";
 import partnerRoutes from "./routes/partner.routes.js";
 import pengurusRoutes from "./routes/pengurus.routes.js";
+import strukturRoutes from "./routes/struktur.routes.js";
+import dpdRoutes from "./routes/dpd.routes.js";
 
 dotenv.config();
 const app = express();
@@ -24,6 +26,8 @@ app.use("/api/uploads", express.static("uploads"));
 app.use("/api/info", infoRoutes);
 app.use("/api/partners", partnerRoutes);
 app.use("/api/kepengurusan", pengurusRoutes);
+app.use("/api/struktur", strukturRoutes);
+app.use("/api/dpd", dpdRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);
